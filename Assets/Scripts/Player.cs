@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
 
   void Update()
   {
-    transform.Translate(Vector3.right * _speed * Time.deltaTime);
+    float horizontalInput = Input.GetAxis("Horizontal");
+    float verticalInput = Input.GetAxis("Vertical");
+    Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
+    transform.Translate(direction * _speed * Time.deltaTime);
   }
 }
