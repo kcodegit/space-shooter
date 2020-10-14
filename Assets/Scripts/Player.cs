@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-  private float _speed = 2.0f;
+  private float _speed = 3.5f;
 
   void Start()
   {
@@ -13,9 +13,18 @@ public class Player : MonoBehaviour
 
   void Update()
   {
-    float horizontalInput = Input.GetAxis("Horizontal");
-    float verticalInput = Input.GetAxis("Vertical");
+    Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+  }
+
+  private void Move(float horizontalInput, float verticalInput)
+  {
     Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
     transform.Translate(direction * _speed * Time.deltaTime);
+
+    float xPos = transform.position.x >= 11.5f ? -11.5f
+      : transform.position.x <= -11.5 ? 11.5f
+      : transform.position.x;
+
+    transform.position = new Vector3(xPos, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
   }
 }
