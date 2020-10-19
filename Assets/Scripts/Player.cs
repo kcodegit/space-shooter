@@ -8,6 +8,10 @@ public class Player : MonoBehaviour
   private float _speed = 3.5f;
   [SerializeField]
   private GameObject _laserPrefab;
+  [SerializeField]
+  private float _fireRate = 0.2f;
+  private float _fireableTime = -1f;
+
   void Start()
   {
     transform.position = new Vector3(0, 0, 0);
@@ -18,15 +22,21 @@ public class Player : MonoBehaviour
     Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
     // if I hit the space key, spawn gameObject
-    if (Input.GetKeyDown(KeyCode.Space))
+    if (Input.GetKeyDown(KeyCode.Space) && CanFire())
     {
       ShootLaser();
     }
   }
 
+  private bool CanFire()
+  {
+    return Time.time > _fireableTime;
+  }
+
   private void ShootLaser()
   {
     Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+    _fireableTime = Time.time + _fireRate; // to set the time to cool down
   }
 
   private void Move(float horizontalInput, float verticalInput)
