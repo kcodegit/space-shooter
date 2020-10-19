@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
   private void ShootLaser()
   {
-    Instantiate(_laserPrefab, transform.position, Quaternion.identity);
+    Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
   }
 
   private void Move(float horizontalInput, float verticalInput)
