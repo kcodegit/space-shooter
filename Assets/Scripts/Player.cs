@@ -20,8 +20,13 @@ public class Player : MonoBehaviour
     // if I hit the space key, spawn gameObject
     if (Input.GetKeyDown(KeyCode.Space))
     {
-      Instantiate(_laserPrefab, transform.position, Quaternion.identity);
+      ShootLaser();
     }
+  }
+
+  private void ShootLaser()
+  {
+    Instantiate(_laserPrefab, transform.position, Quaternion.identity);
   }
 
   private void Move(float horizontalInput, float verticalInput)
