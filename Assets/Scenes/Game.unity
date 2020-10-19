@@ -227,6 +227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1159c3542c3fb495fb15565c6fb3b63a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 3.5
+  _laserPrefab: {fileID: 5160748766132365070, guid: 8c8efd362aef34e18a142cecc4d4c847,
+    type: 3}
 --- !u!1 &748894509
 GameObject:
   m_ObjectHideFlags: 0

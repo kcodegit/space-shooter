@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+  [SerializeField]
   private float _speed = 3.5f;
-
+  [SerializeField]
+  private GameObject _laserPrefab;
   void Start()
   {
     transform.position = new Vector3(0, 0, 0);
@@ -14,6 +16,12 @@ public class Player : MonoBehaviour
   void Update()
   {
     Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+    // if I hit the space key, spawn gameObject
+    if (Input.GetKeyDown(KeyCode.Space))
+    {
+      Instantiate(_laserPrefab, transform.position, Quaternion.identity);
+    }
   }
 
   private void Move(float horizontalInput, float verticalInput)
