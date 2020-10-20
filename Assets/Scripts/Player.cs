@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
   [SerializeField]
   private float _fireRate = 0.2f;
   private float _fireableTime = -1f;
+  [SerializeField]
+  private int _lives = 3;
 
   void Start()
   {
@@ -49,5 +51,10 @@ public class Player : MonoBehaviour
       : transform.position.x;
 
     transform.position = new Vector3(xPos, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
+  }
+
+  public void Damage(int damageAmount)
+  {
+    _lives -= damageAmount;
   }
 }
