@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
   private void ShootLaser()
   {
-    Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+    Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
     _fireableTime = Time.time + _fireRate; // to set the time to cool down
   }
 
