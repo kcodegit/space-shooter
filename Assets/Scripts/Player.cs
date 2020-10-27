@@ -9,11 +9,15 @@ public class Player : MonoBehaviour
   [SerializeField]
   private GameObject _laserPrefab;
   [SerializeField]
+  private GameObject _tripleShotPrefab;
+  [SerializeField]
   private float _fireRate = 0.2f;
   private float _fireableTime = -1f;
   [SerializeField]
   private int _lives = 3;
   private SpawnManager spawnManager;
+  [SerializeField]
+  private bool isTripleShotEnabled = false;
 
   void Start()
   {
@@ -44,7 +48,14 @@ public class Player : MonoBehaviour
 
   private void ShootLaser()
   {
-    Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
+    if (isTripleShotEnabled)
+    {
+      Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+    }
+    else
+    {
+      Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
+    }
     _fireableTime = Time.time + _fireRate; // to set the time to cool down
   }
 
