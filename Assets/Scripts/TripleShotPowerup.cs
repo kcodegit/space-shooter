@@ -27,7 +27,7 @@ public class TripleShotPowerup : MonoBehaviour
     if (other.tag == "Player")
     {
       Player player = other.transform.GetComponent<Player>();
-      if (Player != null)
+      if (player != null)
       {
         player.ActivateTripleShot();
       }
