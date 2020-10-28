@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,12 +8,17 @@ public class SpawnManager : MonoBehaviour
   private GameObject _enemyPrefab;
   [SerializeField]
   private GameObject _enemyContainer;
+  [SerializeField]
+  private GameObject _tripleShotPUPrefab;
+  [SerializeField]
+  private GameObject _itemContainer;
   private bool _stopSpawning = false;
 
   // Start is called before the first frame update
   void Start()
   {
     StartCoroutine(SpawnEnemyRoutine());
+    StartCoroutine(SpawnTripleShotPURoutine());
   }
 
   // Update is called once per frame
@@ -30,6 +35,16 @@ public class SpawnManager : MonoBehaviour
       GameObject newEnemy = SpawnObject(_enemyPrefab, GetRandomPosition());
       newEnemy.transform.parent = _enemyContainer.transform;
       yield return new WaitForSeconds(5.0f);
+    }
+  }
+
+  IEnumerator SpawnTripleShotPURoutine()
+  {
+    while (!_stopSpawning)
+    {
+      GameObject newItem = SpawnObject(_tripleShotPUPrefab, GetRandomPosition());
+      newItem.transform.parent = _itemContainer.transform;
+      yield return new WaitForSeconds(8.0f);
     }
   }
 
