@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
   private int _lives = 3;
   private SpawnManager spawnManager;
   [SerializeField]
-  private bool isTripleShotEnabled = false;
+  private bool _isTripleShotEnabled = false;
 
   void Start()
   {
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
 
   private void ShootLaser()
   {
-    if (isTripleShotEnabled)
+    if (_isTripleShotEnabled)
     {
       Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
     }
@@ -79,5 +79,17 @@ public class Player : MonoBehaviour
       spawnManager.OnPlayerDeath();
       Destroy(this.gameObject);
     }
+  }
+
+  public void ActivateTripleShot()
+  {
+    _isTripleShotEnabled = true;
+    StartCoroutine(TripleShotPowerDownRoutine());
+  }
+
+  IEnumerator TripleShotPowerDownRoutine()
+  {
+    yield return new WaitForSeconds(5.0f);
+    _isTripleShotEnabled = false;
   }
 }
