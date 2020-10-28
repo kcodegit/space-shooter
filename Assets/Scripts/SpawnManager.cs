@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,11 +27,20 @@ public class SpawnManager : MonoBehaviour
   {
     while (!_stopSpawning)
     {
-      Vector3 position = new Vector3(Random.Range(-8f, 8f), 7, 0);
-      GameObject newEnemy = Instantiate(_enemyPrefab, position, Quaternion.identity);
+      GameObject newEnemy = SpawnObject(_enemyPrefab, GetRandomPosition());
       newEnemy.transform.parent = _enemyContainer.transform;
       yield return new WaitForSeconds(5.0f);
     }
+  }
+
+  private GameObject SpawnObject(GameObject prefab, Vector3 position)
+  {
+    return Instantiate(prefab, position, Quaternion.identity);
+  }
+
+  private Vector3 GetRandomPosition()
+  {
+    return new Vector3(Random.Range(-8f, 8f), 7, 0);
   }
 
   public void OnPlayerDeath()
