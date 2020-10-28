@@ -21,4 +21,18 @@ public class TripleShotPowerup : MonoBehaviour
       Destroy(this.gameObject);
     }
   }
+
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.tag == "Player")
+    {
+      Player player = other.transform.GetComponent<Player>();
+      if (Player != null)
+      {
+        player.ActivateTripleShot();
+      }
+
+      Destroy(this.gameObject);
+    }
+  }
 }
