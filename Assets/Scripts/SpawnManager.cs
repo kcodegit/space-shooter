@@ -44,7 +44,7 @@ public class SpawnManager : MonoBehaviour
     {
       GameObject newItem = SpawnObject(_tripleShotPUPrefab, GetRandomPosition());
       newItem.transform.parent = _itemContainer.transform;
-      yield return new WaitForSeconds(8.0f);
+      yield return new WaitForSeconds(Random.Range(3,8));
     }
   }
 
