@@ -11,6 +11,8 @@ public class SpawnManager : MonoBehaviour
   [SerializeField]
   private GameObject _tripleShotPUPrefab;
   [SerializeField]
+  private GameObject _speedUpPrefab;
+  [SerializeField]
   private GameObject _itemContainer;
   private bool _stopSpawning = false;
 
@@ -18,6 +20,7 @@ public class SpawnManager : MonoBehaviour
   {
     StartCoroutine(SpawnEnemyRoutine());
     StartCoroutine(SpawnTripleShotPURoutine());
+    StartCoroutine(SpawnSpeedUpRoutine());
   }
 
   // spawn game object every 5 seconds
@@ -36,6 +39,16 @@ public class SpawnManager : MonoBehaviour
     while (!_stopSpawning)
     {
       GameObject newItem = SpawnObject(_tripleShotPUPrefab, GetRandomPosition());
+      newItem.transform.parent = _itemContainer.transform;
+      yield return new WaitForSeconds(Random.Range(3,8));
+    }
+  }
+
+  IEnumerator SpawnSpeedUpRoutine()
+  {
+    while (!_stopSpawning)
+    {
+      GameObject newItem = SpawnObject(_speedUpPrefab, GetRandomPosition());
       newItem.transform.parent = _itemContainer.transform;
       yield return new WaitForSeconds(Random.Range(3,8));
     }

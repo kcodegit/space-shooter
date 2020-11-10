@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
   [SerializeField]
   private float _speed = 3.5f;
+  private float _speedMultiplier = 2;
   [SerializeField]
   private GameObject _laserPrefab;
   [SerializeField]
@@ -18,6 +19,10 @@ public class Player : MonoBehaviour
   private SpawnManager spawnManager;
   [SerializeField]
   private bool _isTripleShotEnabled = false;
+  [SerializeField]
+  private bool _isSpeedUpEnabled = false;
+  [SerializeField]
+  private bool _isShieldEnabled = false;
 
   void Start()
   {
@@ -61,8 +66,10 @@ public class Player : MonoBehaviour
 
   private void Move(float horizontalInput, float verticalInput)
   {
+    float _speedToSet = _isSpeedUpEnabled ? _speed * _speedMultiplier : _speed;
+
     Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
-    transform.Translate(direction * _speed * Time.deltaTime);
+    transform.Translate(direction * _speedToSet * Time.deltaTime);
 
     float xPos = transform.position.x >= 11.5f ? -11.5f
       : transform.position.x <= -11.5 ? 11.5f
@@ -73,6 +80,10 @@ public class Player : MonoBehaviour
 
   public void Damage(int damageAmount)
   {
+    if(_isShieldEnabled){
+      return;
+    }
+
     _lives -= damageAmount;
     if (_lives == 0)
     {
@@ -87,9 +98,33 @@ public class Player : MonoBehaviour
     StartCoroutine(TripleShotPowerDownRoutine());
   }
 
+    public void ActivateSpeedUp()
+  {
+    _isSpeedUpEnabled = true;
+    StartCoroutine(SpeedUpExpireRoutine());
+  }
+
+    public void ActivateShield()
+  {
+    _isShieldEnabled = true;
+    StartCoroutine(SpeedUpExpireRoutine());
+  }
+
   IEnumerator TripleShotPowerDownRoutine()
   {
     yield return new WaitForSeconds(5.0f);
     _isTripleShotEnabled = false;
+  }
+
+  IEnumerator SpeedUpExpireRoutine()
+  {
+    yield return new WaitForSeconds(5.0f);
+    _isSpeedUpEnabled = false;
+  }
+
+  IEnumerator ShieldExpireRoutine()
+  {
+    yield return new WaitForSeconds(5.0f);
+    _isShieldEnabled = false;
   }
 }
