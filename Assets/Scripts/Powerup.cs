@@ -8,7 +8,7 @@ public class Powerup : MonoBehaviour
   private float _speed = 4.0f;
 
   [SerializeField]
-  private int _powerUpId = 0;
+  private PowerupId _powerUpId = PowerupId.TripleShot;
 
   void Update()
   {
@@ -33,4 +33,10 @@ public class Powerup : MonoBehaviour
       Destroy(this.gameObject);
     }
   }
+}
+
+enum PowerupId: int {
+  TripleShot = 0,
+  Speed = 1,
+  Shield = 2
 }
