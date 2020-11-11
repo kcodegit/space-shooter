@@ -26,18 +26,23 @@ public class Player : MonoBehaviour
   [SerializeField]
   private bool _isShieldEnabled = false;
 
+  private int _score = 0;
+
+  private UIManager UIManager;
+
   void Start()
   {
     transform.position = new Vector3(0, 0, 0);
     spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+    UIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
     if (spawnManager == null)
     {
       Debug.LogError("SpawnManager is null");
     }
-    if (_shieldVisualizer == null)
+    if (UIManager == null)
     {
-      Debug.LogError("ShieldVisualizer is null");
+      Debug.LogError("UIManager is null");
     }
   }
 
@@ -97,6 +102,11 @@ public class Player : MonoBehaviour
       spawnManager.OnPlayerDeath();
       Destroy(this.gameObject);
     }
+  }
+
+  public void AddScore(int score){
+    _score += score;
+    UIManager.UpdateScoreText(_score);
   }
 
   public void ActivateTripleShot()
