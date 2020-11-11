@@ -172,6 +172,7 @@ MonoBehaviour:
   _powerUpPrefabs:
   - {fileID: 2059540129534978860, guid: 76da5017571b14ba6a8a981a9465952c, type: 3}
   - {fileID: 265748707483931426, guid: 4ca0624bb06c448b699e3d498561e4ee, type: 3}
+  - {fileID: 2815052356234682731, guid: 12dde305727b3452abe82a6629dc1196, type: 3}
   _itemContainer: {fileID: 1576494078}
 --- !u!1 &748894509
 GameObject:

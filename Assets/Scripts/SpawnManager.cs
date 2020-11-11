@@ -35,7 +35,7 @@ public class SpawnManager : MonoBehaviour
   {
     while (!_stopSpawning)
     {
-      int prefabIndex = Random.Range(0, 2);
+      int prefabIndex = Random.Range(0, 3);
       GameObject newItem = SpawnObject(_powerUpPrefabs[prefabIndex], GetRandomPosition());
       newItem.transform.parent = _itemContainer.transform;
       yield return new WaitForSeconds(Random.Range(3,8));
