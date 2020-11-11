@@ -81,6 +81,7 @@ public class Player : MonoBehaviour
   public void Damage(int damageAmount)
   {
     if(_isShieldEnabled){
+      _isShieldEnabled = false;
       return;
     }
 
@@ -107,7 +108,6 @@ public class Player : MonoBehaviour
     public void ActivateShield()
   {
     _isShieldEnabled = true;
-    StartCoroutine(SpeedUpExpireRoutine());
   }
 
   IEnumerator TripleShotPowerDownRoutine()
@@ -120,11 +120,5 @@ public class Player : MonoBehaviour
   {
     yield return new WaitForSeconds(5.0f);
     _isSpeedUpEnabled = false;
-  }
-
-  IEnumerator ShieldExpireRoutine()
-  {
-    yield return new WaitForSeconds(5.0f);
-    _isShieldEnabled = false;
   }
 }
