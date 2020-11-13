@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
 
     _lives -= damageAmount;
     UIManager.UpdateLives(_lives);
-    if (_lives == 0)
+    if (_lives <= 0)
     {
       spawnManager.OnPlayerDeath();
       Destroy(this.gameObject);

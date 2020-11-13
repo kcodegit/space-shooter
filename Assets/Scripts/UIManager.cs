@@ -15,11 +15,18 @@ public class UIManager : MonoBehaviour
   private Text _gameOverText;
   [SerializeField]
   private Text _restartText;
+  private GameManager _gameManager;
 
   void Start()
   {
     UpdateScoreText(0);
-  }
+    _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
+
+  if (_gameManager == null)
+    {
+      Debug.LogError("GameManager is null");
+    }
+  } 
 
   public void UpdateScoreText(int score)
   {
@@ -40,6 +47,7 @@ public class UIManager : MonoBehaviour
     _gameOverText.gameObject.SetActive(true);
     _restartText.gameObject.SetActive(true);
     StartCoroutine(GameOverFlickerRoutine());
+    _gameManager.GameOver();
   }
 
   IEnumerator GameOverFlickerRoutine(){
