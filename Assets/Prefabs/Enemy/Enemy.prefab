@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
+  _explosionPrefab: {fileID: 1833377117292664224, guid: 649d511bf026942419fcc7293a37cf32,
+    type: 3}
 --- !u!212 &1359813685128270457
 SpriteRenderer:
   m_ObjectHideFlags: 0

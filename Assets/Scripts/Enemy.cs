@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
   [SerializeField]
   private float _speed = 4.0f;
+  [SerializeField]
+  private GameObject _explosionPrefab;
 
   private Player player;
 
@@ -35,6 +37,7 @@ public class Enemy : MonoBehaviour
     if (other.tag == "Player")
     {
       player.Damage(1);
+      Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
       Destroy(this.gameObject);
     }
 
@@ -42,6 +45,7 @@ public class Enemy : MonoBehaviour
     {
       Destroy(other.gameObject);
       player.AddScore(10);
+      Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
       Destroy(this.gameObject);
     }
   }
