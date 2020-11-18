@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
   }
 
   void Update()
-  {
+ {
     Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
     // if I hit the space key, spawn gameObject

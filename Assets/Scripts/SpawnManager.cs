@@ -16,6 +16,11 @@ public class SpawnManager : MonoBehaviour
 
   void Start()
   {
+
+  }
+
+  public void StartSpawning()
+  {
     StartCoroutine(SpawnEnemyRoutine());
     StartCoroutine(SpawnPowerUpRoutine());
   }
@@ -23,6 +28,7 @@ public class SpawnManager : MonoBehaviour
   // spawn game object every 5 seconds
   IEnumerator SpawnEnemyRoutine()
   {
+    yield return new WaitForSeconds(2);
     while (!_stopSpawning)
     {
       GameObject newEnemy = SpawnObject(_enemyPrefab, GetRandomPosition());
@@ -33,6 +39,7 @@ public class SpawnManager : MonoBehaviour
 
   IEnumerator SpawnPowerUpRoutine()
   {
+    yield return new WaitForSeconds(2);
     while (!_stopSpawning)
     {
       int prefabIndex = Random.Range(0, 3);
