@@ -248,7 +248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &337023526
 Transform:
   m_ObjectHideFlags: 0
@@ -473,7 +473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &666577557
 Transform:
   m_ObjectHideFlags: 0
@@ -1472,6 +1472,8 @@ MonoBehaviour:
   _isTripleShotEnabled: 0
   _isSpeedUpEnabled: 0
   _isShieldEnabled: 0
+  _rightEngineSmoke: {fileID: 337023525}
+  _leftEngineSmoke: {fileID: 666577556}
 --- !u!61 &1887234101
 BoxCollider2D:
   m_ObjectHideFlags: 0

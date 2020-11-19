@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
   private bool _isSpeedUpEnabled = false;
   [SerializeField]
   private bool _isShieldEnabled = false;
+  [SerializeField]
+  private GameObject _rightEngineSmoke, _leftEngineSmoke;
 
   private int _score = 0;
 
@@ -98,10 +100,18 @@ public class Player : MonoBehaviour
 
     _lives -= damageAmount;
     UIManager.UpdateLives(_lives);
+    // Game Over
     if (_lives <= 0)
     {
       spawnManager.OnPlayerDeath();
       Destroy(this.gameObject);
+    }
+    // Damage visualization
+    if(_lives == 2){
+      _rightEngineSmoke.SetActive(true);
+    }
+    if(_lives == 1){
+      _leftEngineSmoke.SetActive(true);
     }
   }
 
