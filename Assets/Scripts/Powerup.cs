@@ -10,6 +10,9 @@ public class Powerup : MonoBehaviour
   [SerializeField]
   private PowerupId _powerUpId = PowerupId.TripleShot;
 
+  [SerializeField]
+  private AudioClip powerUpAudio;
+
   void Update()
   {
     transform.Translate(Vector3.down * _speed * Time.deltaTime);
@@ -27,6 +30,7 @@ public class Powerup : MonoBehaviour
       Player player = other.transform.GetComponent<Player>();
       if (player != null)
       {
+        AudioSource.PlayClipAtPoint(powerUpAudio, transform.position);
         switch(_powerUpId){
           case PowerupId.TripleShot:
             player.ActivateTripleShot();
