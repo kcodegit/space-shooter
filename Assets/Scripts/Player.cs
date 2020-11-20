@@ -27,6 +27,9 @@ public class Player : MonoBehaviour
   private bool _isShieldEnabled = false;
   [SerializeField]
   private GameObject _rightEngineSmoke, _leftEngineSmoke;
+  [SerializeField]
+  private AudioClip laserAudio;
+  private AudioSource audioSource;
 
   private int _score = 0;
 
@@ -37,6 +40,7 @@ public class Player : MonoBehaviour
     transform.position = new Vector3(0, 0, 0);
     spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
     UIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+    audioSource = GetComponent<AudioSource>();
 
     if (spawnManager == null)
     {
@@ -45,6 +49,12 @@ public class Player : MonoBehaviour
     if (UIManager == null)
     {
       Debug.LogError("UIManager is null");
+    }
+    if (audioSource == null)
+    {
+      Debug.LogError("audioSource is null");
+    } else {
+      audioSource.clip = laserAudio;
     }
   }
 
@@ -75,6 +85,8 @@ public class Player : MonoBehaviour
       Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
     }
     _fireableTime = Time.time + _fireRate; // to set the time to cool down
+
+    audioSource.Play();
   }
 
   private void Move(float horizontalInput, float verticalInput)
