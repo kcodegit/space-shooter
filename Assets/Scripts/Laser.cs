@@ -6,7 +6,7 @@ public class Laser : MonoBehaviour
 {
   private float _speed = 8.0f;
   private bool _isPlayerLaser = true;
-  
+
   void Update()
   {
     Move(_isPlayerLaser);
@@ -15,9 +15,9 @@ public class Laser : MonoBehaviour
   private void Move(bool isUp)
   {
     // Time.deltaTime: time between frames of FPS
-    transform.Translate(isUp ? Vector3.up : Vector3.down * _speed * Time.deltaTime);
+    transform.Translate((isUp ? Vector3.up : Vector3.down) * _speed * Time.deltaTime);
 
-    bool isOutOfScreen = isUp ? transform.position.y > 8f: transform.position.y < -8f;
+    bool isOutOfScreen = isUp ? transform.position.y > 8f : transform.position.y < -8f;
     if (isOutOfScreen)
     {
       if (transform.parent != null)
@@ -28,7 +28,8 @@ public class Laser : MonoBehaviour
     }
   }
 
-  public void SetEnemyLaser(){
+  public void SetEnemyLaser()
+  {
     _isPlayerLaser = false;
   }
 
@@ -37,7 +38,8 @@ public class Laser : MonoBehaviour
     if (other.tag == "Player" && !_isPlayerLaser)
     {
       Player player = other.GetComponent<Player>();
-      if(player != null){
+      if (player != null)
+      {
         player.Damage(1);
         Destroy(this.gameObject);
       }

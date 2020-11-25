@@ -14,7 +14,8 @@ public class Enemy : MonoBehaviour
 
   private Player player;
 
-  void Start(){
+  void Start()
+  {
     player = GameObject.Find("Player").GetComponent<Player>();
 
     if (player == null)
@@ -26,8 +27,9 @@ public class Enemy : MonoBehaviour
   void Update()
   {
     Move();
-    
-    if(Time.time > _fireableTime) {
+
+    if (Time.time > _fireableTime)
+    {
       FireLaser();
     }
   }
