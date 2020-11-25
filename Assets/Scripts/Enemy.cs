@@ -5,9 +5,12 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
   [SerializeField]
-  private float _speed = 4.0f;
+  private float _speed = 2.0f;
   [SerializeField]
   private GameObject _explosionPrefab;
+  [SerializeField]
+  private GameObject _laserPrefab;
+  private float _fireableTime = -1;
 
   private Player player;
 
@@ -21,6 +24,27 @@ public class Enemy : MonoBehaviour
   }
 
   void Update()
+  {
+    Move();
+    
+    if(Time.time > _fireableTime) {
+      FireLaser();
+    }
+  }
+
+  private void FireLaser()
+  {
+    Laser[] lasers = Instantiate(_laserPrefab, transform.position, Quaternion.identity).GetComponentsInChildren<Laser>();
+    foreach (Laser l in lasers)
+    {
+      l.SetEnemyLaser();
+    }
+
+    float _coolDownTime = Random.Range(2f, 5f);
+    _fireableTime = Time.time + _coolDownTime;
+  }
+
+  private void Move()
   {
     transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
