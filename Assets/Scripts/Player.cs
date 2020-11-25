@@ -53,13 +53,15 @@ public class Player : MonoBehaviour
     if (audioSource == null)
     {
       Debug.LogError("audioSource is null");
-    } else {
+    }
+    else
+    {
       audioSource.clip = laserAudio;
     }
   }
 
   void Update()
- {
+  {
     Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
     // if I hit the space key, spawn gameObject
@@ -105,7 +107,8 @@ public class Player : MonoBehaviour
 
   public void Damage(int damageAmount)
   {
-    if(_isShieldEnabled){
+    if (_isShieldEnabled)
+    {
       DeactivateShield();
       return;
     }
@@ -119,15 +122,18 @@ public class Player : MonoBehaviour
       Destroy(this.gameObject);
     }
     // Damage visualization
-    if(_lives == 2){
+    if (_lives == 2)
+    {
       _rightEngineSmoke.SetActive(true);
     }
-    if(_lives == 1){
+    if (_lives == 1)
+    {
       _leftEngineSmoke.SetActive(true);
     }
   }
 
-  public void AddScore(int score){
+  public void AddScore(int score)
+  {
     _score += score;
     UIManager.UpdateScoreText(_score);
   }
@@ -149,7 +155,7 @@ public class Player : MonoBehaviour
     _isShieldEnabled = true;
     _shieldVisualizer.SetActive(true);
   }
-  
+
   public void DeactivateShield()
   {
     _isShieldEnabled = false;
