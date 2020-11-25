@@ -46,6 +46,8 @@ public class Enemy : MonoBehaviour
       Destroy(other.gameObject);
       player.AddScore(10);
       Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+      // Just in case we delay the destroy enemy object
+      Destroy(this.gameObject.GetComponent<Collider2D>());
       Destroy(this.gameObject);
     }
   }
