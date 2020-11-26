@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
   [SerializeField]
+  public bool isCoOpGame = false;
+  [SerializeField]
   private bool _isGameOver;
 
   // Update is called once per frame

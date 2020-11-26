@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
   private float _fireableTime = -1f;
   [SerializeField]
   private int _lives = 3;
-  private SpawnManager spawnManager;
   [SerializeField]
   private bool _isTripleShotEnabled = false;
   [SerializeField]
@@ -33,13 +32,16 @@ public class Player : MonoBehaviour
 
   private int _score = 0;
 
+  // managers
+  private SpawnManager spawnManager;
   private UIManager UIManager;
+  private GameManager gameManager;
 
   void Start()
   {
-    transform.position = new Vector3(0, 0, 0);
     spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
     UIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+    gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
     audioSource = GetComponent<AudioSource>();
 
     if (spawnManager == null)
@@ -50,6 +52,10 @@ public class Player : MonoBehaviour
     {
       Debug.LogError("UIManager is null");
     }
+    if (gameManager == null)
+    {
+      Debug.LogError("GameManager is null");
+    }
     if (audioSource == null)
     {
       Debug.LogError("audioSource is null");
@@ -57,6 +63,12 @@ public class Player : MonoBehaviour
     else
     {
       audioSource.clip = laserAudio;
+    }
+
+    // positioning
+    if (!gameManager.isCoOpGame)
+    {
+      transform.position = new Vector3(0, 0, 0);
     }
   }
 
