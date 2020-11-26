@@ -22,11 +22,11 @@ public class UIManager : MonoBehaviour
     UpdateScoreText(0);
     _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
 
-  if (_gameManager == null)
+    if (_gameManager == null)
     {
       Debug.LogError("GameManager is null");
     }
-  } 
+  }
 
   public void UpdateScoreText(int score)
   {
@@ -35,23 +35,28 @@ public class UIManager : MonoBehaviour
     _restartText.gameObject.SetActive(false);
   }
 
-  public void UpdateLives(int currentLives){
+  public void UpdateLives(int currentLives)
+  {
     _livesImage.sprite = _livesSprites[currentLives];
 
-    if(currentLives == 0){
+    if (currentLives == 0)
+    {
       GameOverSequence();
     }
   }
 
-  void GameOverSequence(){
+  void GameOverSequence()
+  {
     _gameOverText.gameObject.SetActive(true);
     _restartText.gameObject.SetActive(true);
     StartCoroutine(GameOverFlickerRoutine());
     _gameManager.GameOver();
   }
 
-  IEnumerator GameOverFlickerRoutine(){
-    while(true){
+  IEnumerator GameOverFlickerRoutine()
+  {
+    while (true)
+    {
       _gameOverText.text = "GAME OVER";
       yield return new WaitForSeconds(0.5f);
       _gameOverText.text = "";
