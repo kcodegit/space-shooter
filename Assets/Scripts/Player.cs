@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour
 {
@@ -74,13 +76,29 @@ public class Player : MonoBehaviour
 
   void Update()
   {
-    Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+    float horizontalInput = CrossPlatformInputManager.GetAxis("Horizontal");
+    float verticalInput = CrossPlatformInputManager.GetAxis("Vertical");
 
-    // if I hit the space key, spawn gameObject
-    if (Input.GetKeyDown(KeyCode.Space) && CanFire())
+    Move(horizontalInput, verticalInput);
+
+#if UNITY_ANDROID
+    if ((Input.GetKeyDown(KeyCode.Space) || CrossPlatformInputManager.GetButtonDown("Fire")) && CanFire())
     {
       ShootLaser();
     }
+#elif UNITY_IOS
+    if ((Input.GetKeyDown(KeyCode.Space) || CrossPlatformInputManager.GetButtonDown("Fire")) && CanFire())
+    {
+      ShootLaser();
+    }
+#else
+    if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && CanFire())
+    {
+      ShootLaser();
+    }
+#endif
+
+
   }
 
   private bool CanFire()
